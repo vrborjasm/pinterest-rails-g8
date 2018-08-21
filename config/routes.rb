@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :pins
   get 'pages/index'
 
   root 'pages#index'
