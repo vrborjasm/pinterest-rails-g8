@@ -3,6 +3,10 @@ class PinsController < ApplicationController
 
   # GET /pins
   # GET /pins.json
+  def mypins
+    @pins = current_user.pins
+  end
+
   def index
     @pins = Pin.all
   end
