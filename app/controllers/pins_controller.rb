@@ -3,6 +3,10 @@ class PinsController < ApplicationController
 
   # GET /pins
   # GET /pins.json
+  def mypins
+    @pins = current_user.pins
+  end
+
   def index
     @pins = Pin.all
   end
@@ -25,10 +29,10 @@ class PinsController < ApplicationController
   # POST /pins.json
   def create
     @pin = Pin.new(pin_params)
-
+    @pin.user = current_user
     respond_to do |format|
       if @pin.save
-        format.html { redirect_to @pin, notice: 'Pin was successfully created.' }
+        format.html { redirect_to mypins_path, notice: 'Pin was successfully created.' }
         format.json { render :show, status: :created, location: @pin }
       else
         format.html { render :new }
@@ -42,7 +46,7 @@ class PinsController < ApplicationController
   def update
     respond_to do |format|
       if @pin.update(pin_params)
-        format.html { redirect_to @pin, notice: 'Pin was successfully updated.' }
+        format.html { redirect_to mypins_path, notice: 'Pin was successfully updated.' }
         format.json { render :show, status: :ok, location: @pin }
       else
         format.html { render :edit }
@@ -56,7 +60,7 @@ class PinsController < ApplicationController
   def destroy
     @pin.destroy
     respond_to do |format|
-      format.html { redirect_to pins_url, notice: 'Pin was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Pin was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Pin.delete_all
+User.delete_all
+
+10.times  do |i|
+	Pin.create(
+		name: "Pin #{i+1}",
+		photo: 'http://placeimg.com/640/480/any',
+		description: "Random #{i+1}",
+		user_id: 0
+		)
+	
+end
+
+puts "Pins created"
